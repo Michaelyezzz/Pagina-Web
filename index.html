@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael J. Yanez | Estudiante de Ingeniería en Computación</title>
+    <meta name="description" content="Portafolio de Michael J. Yanez, estudiante de Ingeniería en Ciencias de la Computación con interés en ciberseguridad y desarrollo de software">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // JavaScript mejorado para manejo de secciones
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedSection = localStorage.getItem('currentSection') || 'principal';
+            showSection(savedSection);
+            highlightActiveNav(savedSection);
+
+            document.body.style.opacity = '1';
+
+            // Añade listeners para navegación
+            const navItems = document.querySelectorAll('nav a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('onclick').match(/'(.+)'/)[1];
+                    showSection(sectionId);
+                    highlightActiveNav(sectionId);
+                });
+            });
+        });
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+                section.style.opacity = '0';
+            });
+
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+                setTimeout(() => {
+                    selectedSection.style.opacity = '1';
+                }, 50);
+            }
+
+            // Guardar la sección actual
+            localStorage.setItem('currentSection', sectionId);
+            
+            // Resaltar elemento activo en el menú
+            highlightActiveNav(sectionId);
+        }
+
+        function highlightActiveNav(sectionId) {
+            const navItems = document.querySelectorAll('nav a');
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('onclick').includes(sectionId)) {
+                    item.classList.add('active');
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('principal')" class="active"><i class="fas fa-home"></i> Principal</a></li>
+            <li><a href="#" onclick="showSection('certificados')"><i class="fas fa-certificate"></i> Certificados</a></li>
+            <li><a href="#" onclick="showSection('proyectos')"><i class="fas fa-code"></i> Proyectos</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección Principal -->
+    <section id="principal">
+        <div class="content">
+            <div class="profile-pic">
+                <img src="foto.jpeg" alt="Foto de perfil de Michael J. Yánez" width="300" height="300">
+                <div class="social-links">
+                    <a href="https://github.com/Michaelyezzz" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/jobs/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="michael.yanez@epn.edu.ec"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="text">
+                <h1>Michael J. Yánez</h1>
+                <h2><i class="fas fa-graduation-cap"></i> Estudiante de Ingeniería en Ciencias de la Computación</h2>
+                
+                <div class="about-me">
+                    <h3><i class="fas fa-user"></i> Sobre mí</h3>
+                    <p>Actualmente cursando la carrera en la <strong>Escuela Politécnica Nacional</strong> con cualidades destacadas en:</p>
+                    <ul>
+                        <li><i class="fas fa-users"></i> <strong>Habilidades blandas</strong> y oratoria</li>
+                        <li><i class="fas fa-network-wired"></i> <strong>Liderazgo</strong> y trabajo en equipo</li>
+                        <li><i class="fas fa-brain"></i> <strong>Aprendizaje rápido</strong> y adaptabilidad</li>
+                    </ul>
+                </div>
+                
+                <button class="contact-btn" onclick="showSection('contacto')"><i class="fas fa-paper-plane"></i> Contáctame</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Certificados -->
+    <section id="certificados">
+        <h2><i class="fas fa-certificate"></i> Mis Certificados</h2>
+        <div class="certificates-grid">
+            <div class="certificate-card">
+                <div class="certificate-img">
+                    <img src="certificado2.png" alt="Certificado Principiante de Python">
+                </div>
+                <div class="certificate-info">
+                    <h3>Certificado Principiante de Python</h3>
+                    <p>Curso introductorio cubriendo fundamentos de programación en Python</p>
+                    <span class="date"><i class="far fa-calendar-alt"></i> Enero 2025</span>
+                </div>
+            </div>
+            
+            <div class="certificate-card">
+                <div class="certificate-img">
+                    <img src="certificado1.jpg" alt="Certificado Intermedio de Python">
+                </div>
+                <div class="certificate-info">
+                    <h3>Certificado de Ciberseguridad</h3>
+                    <p>Introducción de Ciberseguridad</p>
+                    <span class="date"><i class="far fa-calendar-alt"></i> Enero 2025</span>
+                </div>
+            </div>
+            
+            <div class="certificate-card coming-soon">
+                <div class="coming-soon-overlay">
+                    <i class="fas fa-hourglass-half"></i>
+                    <p>Próximamente más certificados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Proyectos -->
+    <section id="proyectos">
+        <h2><i class="fas fa-code"></i> Mis Proyectos</h2>
+        
+        <div class="projects-container">
+            <div class="project-card">
+                <div class="project-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>En desarrollo</h3>
+                <p>Actualmente trabajando en proyectos personales para aplicar mis conocimientos en programación.</p>
+                <div class="skills-used">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Ideas en progreso</h3>
+                <p>Explorando ideas innovadoras para proyectos relacionados con ciberseguridad y automatización.</p>
+                <div class="skills-used">
+                    <span class="skill-tag">Ciberseguridad</span>
+                    <span class="skill-tag">Automatización</span>
+                </div>
+            </div>
+            
+            <div class="project-card coming-soon">
+                <div class="coming-soon-overlay">
+                    <i class="fas fa-magic"></i>
+                    <p>Próximos proyectos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <p>&copy; 2025 Michael J. Yanez. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
